@@ -1,0 +1,5 @@
+# Ensure binary files are not altered (EOL) and treated as binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary

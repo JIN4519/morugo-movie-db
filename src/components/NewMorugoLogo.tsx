@@ -6,9 +6,9 @@ interface NewMorugoLogoProps {
 }
 
 export function NewMorugoLogo({ size = 120, className = '' }: NewMorugoLogoProps) {
-  // 로컬 개발 시: public/images/logo.png 파일을 사용하세요
-  // 로고 이미지를 public/images/ 폴더에 저장하세요
-  const logoImage = '/src/public/images/logo.png';
+  // 로컬 개발 및 배포 시: public/images/logo.png 파일을 사용하세요
+  // 로고 이미지를 프로젝트 루트의 public/images/에 저장하세요
+  const logoImage = '/images/logo.png';
   
   return (
     <img 

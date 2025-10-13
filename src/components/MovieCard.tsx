@@ -34,7 +34,19 @@ export function MovieCard({
   };
 
   return (
-    <div className="group relative bg-white dark:bg-slate-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
+    <div
+      role="button"
+      tabIndex={0}
+      onClick={() => onSelect(movie)}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          onSelect(movie);
+        }
+      }}
+      className="group relative bg-white dark:bg-slate-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer"
+      style={{ touchAction: 'manipulation' }}
+    >
       {/* Movie Poster */}
       <div className="relative aspect-[3/4] overflow-hidden">
         <ImageWithFallback
@@ -68,7 +80,7 @@ export function MovieCard({
             <Button
               size="sm"
               variant={isFavorite ? 'default' : 'secondary'}
-              onClick={(e) => {
+              onClick={(e: React.MouseEvent) => {
                 e.stopPropagation();
                 onToggleFavorite?.(movie.id);
               }}
@@ -79,7 +91,7 @@ export function MovieCard({
             <Button
               size="sm"
               variant={isInWatchlist ? 'default' : 'secondary'}
-              onClick={(e) => {
+              onClick={(e: React.MouseEvent) => {
                 e.stopPropagation();
                 onToggleWatchlist?.(movie.id);
               }}
@@ -92,9 +104,9 @@ export function MovieCard({
       </div>
 
       {/* Mobile compact info */}
-      <div className="p-3 md:hidden">
+  <div className="p-3 md:hidden active:scale-95 transition-transform duration-150">
         <h3 className="font-medium text-base text-gray-900 dark:text-white mb-1 line-clamp-2">{movie.title}</h3>
-        <div className="flex items-center justify-between text-sm">
+  <div className="flex items-center justify-between text-sm">
           <div className="flex items-center space-x-1">
             <Star className="w-4 h-4 text-yellow-400 fill-current" />
             <span className="text-gray-900 dark:text-white font-medium">{movie.rating > 0 ? movie.rating.toFixed(1) : '-'}</span>

@@ -37,7 +37,19 @@ export function Header({ onSearch, onNavigate, activeSection, isLoggedIn, onLogi
     <header className="bg-white dark:bg-slate-900 shadow-sm border-b border-gray-200 dark:border-slate-700 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <div className="flex-shrink-0 cursor-pointer" onClick={() => onNavigate('home')}>
+          <div
+            className="flex-shrink-0 cursor-pointer"
+            role="button"
+            tabIndex={0}
+            onClick={() => onNavigate('home')}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                onNavigate('home');
+              }
+            }}
+            aria-label="홈으로 이동"
+          >
             <NewMorugoLogo size={40} />
           </div>
 
@@ -46,11 +58,20 @@ export function Header({ onSearch, onNavigate, activeSection, isLoggedIn, onLogi
               <button
                 key={item.id}
                 onClick={() => onNavigate(item.id)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    onNavigate(item.id);
+                  }
+                }}
                 className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                   activeSection === item.id
                     ? 'text-cyan-600 dark:text-cyan-400 bg-cyan-50 dark:bg-cyan-900/20'
                     : 'text-gray-700 dark:text-gray-300 hover:text-cyan-500 dark:hover:text-cyan-400'
                 }`}
+                role="button"
+                tabIndex={0}
+                aria-current={activeSection === item.id ? 'page' : undefined}
               >
                 {item.label}
               </button>
